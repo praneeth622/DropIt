@@ -4,8 +4,7 @@ import {  UserButton } from '@clerk/nextjs'
 function Files() {
   return (
     <div>
-      Files
-      <UserButton afterSignOutUrl='' />
+      
     </div>
   )
 }

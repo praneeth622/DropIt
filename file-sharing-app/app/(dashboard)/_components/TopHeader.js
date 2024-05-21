@@ -5,7 +5,7 @@ import React from 'react'
 
 function TopHeader() {
   return (
-    <div className='flex p-5 border-b items-center first-letter:justify-between md:justify-end'>
+    <div className=' flex p-5 border-b items-center justify-between md:justify-end '>
       <AlignJustify className='md:hidden' />
       <Image src="./logo.svg" width={150} height={100} className='md:hidden' />
       <UserButton />
