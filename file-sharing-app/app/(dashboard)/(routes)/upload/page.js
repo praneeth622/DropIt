@@ -1,12 +1,23 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import UploadForm from './_components/UploadForm'
+import generateRandomString from '../../../_utlis/GenarateRandomString'
 import {app} from '../../../../firebaseConfig'
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore"; 
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { useUser } from '@clerk/nextjs';
 
 function Upload() {
+
   const storage =getStorage(app)
+  const db = getFirestore(app);
+
+  const {user}=useUser();
+
   const [Progress,setProgress] = useState(0)
+  const [uploadCompleted , setUploadCompleted] = useState(false)
+
   const funuploadFile = (File) => {
     console.log(File?.type);
   
@@ -23,9 +34,11 @@ function Upload() {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
         setProgress(progress)
+        setUploadCompleted(true)
 
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log('File available at', downloadURL);
+          saveInfo(File,downloadURL)
         });
       },
       (error) => {
@@ -33,7 +46,29 @@ function Upload() {
         console.error('Upload failed:', error);
       }
     );
+
+    const saveInfo = async(File,fileurl)=>{
+      const docId=generateRandomString(6).toString()
+      await setDoc(doc(db, "FileData", docId),{
+        fileName : File?.name,
+        fileSize: File?.size,
+        fileType: File?.type,
+        fileUrl:fileurl,
+        userEmailId:user?.primaryEmailAddress.emailAddress,
+        userName:user?.username,
+        password:'',
+        id:docId,
+        shortURL:process.env.NEXT_PUBLIC_BASE_URL+docId,
+      });
+    }
   }
+
+  useEffect(()=>{
+    uploadCompleted&&setTimeout(()=>{
+      setUploadCompleted(false)
+      window.location.reload()
+    },5000)
+  },[uploadCompleted==true])
   
   return (
     <div className='p-5 px-8 md:px-28'>
