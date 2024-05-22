@@ -4,7 +4,7 @@ import AlertMsg from './AlertMsg'
 import FilePreview from './FilePreview'
 import file from '../../file/page'
 
-function UploadForm() {
+function UploadForm({uploadButtonClick}) {
     const [File,setFile] = useState()
     const [error,setError] = useState()
     const onFileSelect = (file)=>{
@@ -53,7 +53,7 @@ function UploadForm() {
             </div>
             {error&& <AlertMsg msg={error} />}
             {File&& <FilePreview file={File} removeFile={()=>setFile(null)}/>}
-            <button disabled={!File} className=' p-5 my-5 text-white disabled:bg-gray-400 w-[30%] bg-orange-500 rounded-full'>
+            <button onClick={()=>uploadButtonClick(File)} disabled={!File} className=' p-5 my-5 text-white disabled:bg-gray-400 w-[30%] bg-orange-500 rounded-full'>
                 Upload
             </button>
 
