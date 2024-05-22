@@ -1,12 +1,19 @@
-
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AlertMsg from './AlertMsg'
 import FilePreview from './FilePreview'
 import file from '../../file/page'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ProgressBar from './ProgressBar'
 
-function UploadForm({uploadButtonClick}) {
+function UploadForm({uploadButtonClick,progress}) {
+
+    
     const [File,setFile] = useState()
     const [error,setError] = useState()
+
+    const notifySuccess = () => toast.success("File Uploaded Sucessfully!", { position: "top-right" });
+    
     const onFileSelect = (file)=>{
         console.log(file.size)
         if(file&&file.size > 2000000){
@@ -18,6 +25,12 @@ function UploadForm({uploadButtonClick}) {
         setError(null)
         setFile(file)
     }
+
+    useEffect(()=>{
+        if(progress == 100){
+            notifySuccess()
+        }
+      },[progress])
     return (
         <div className='text-center'>
             <div className="flex items-center justify-center w-full">
@@ -53,9 +66,10 @@ function UploadForm({uploadButtonClick}) {
             </div>
             {error&& <AlertMsg msg={error} />}
             {File&& <FilePreview file={File} removeFile={()=>setFile(null)}/>}
-            <button onClick={()=>uploadButtonClick(File)} disabled={!File} className=' p-5 my-5 text-white disabled:bg-gray-400 w-[30%] bg-orange-500 rounded-full'>
+            {progress>0?<ProgressBar progress={progress} />:<button onClick={()=>uploadButtonClick(File)} disabled={!File} className=' p-5 my-5 text-white disabled:bg-gray-400 w-[30%] bg-orange-500 rounded-full'>
                 Upload
-            </button>
+            </button>}
+            <ToastContainer />
 
         </div>
     )
