@@ -7,16 +7,20 @@ import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore"; 
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation'
 
 function Upload() {
 
   const storage =getStorage(app)
   const db = getFirestore(app);
+  const router = useRouter(); 
 
   const {user}=useUser();
 
   const [Progress,setProgress] = useState(0)
   const [uploadCompleted , setUploadCompleted] = useState(false)
+  const [fileURL,setFileURL] = useState()
+  const [newfileURL,setnewFileURL] = useState(false)
 
   const funuploadFile = (File) => {
     console.log(File?.type);
@@ -40,6 +44,7 @@ function Upload() {
           console.log('File available at', downloadURL);
           saveInfo(File,downloadURL)
         });
+        
       },
       (error) => {
         // Handle unsuccessful uploads
@@ -49,6 +54,7 @@ function Upload() {
 
     const saveInfo = async(File,fileurl)=>{
       const docId=generateRandomString(6).toString()
+      
       await setDoc(doc(db, "FileData", docId),{
         fileName : File?.name,
         fileSize: File?.size,
@@ -60,15 +66,23 @@ function Upload() {
         id:docId,
         shortURL:process.env.NEXT_PUBLIC_BASE_URL+docId,
       });
+      setFileURL(docId)
     }
   }
+  useEffect(()=>{
+    if (uploadCompleted == true){
+      setnewFileURL(true)
+    }
+  },[fileURL])
 
   useEffect(()=>{
     uploadCompleted&&setTimeout(()=>{
       setUploadCompleted(false)
-      window.location.reload()
-    },5000)
-  },[uploadCompleted==true])
+      //window.location.reload()
+       //console.log("/file-preview/" + fileURL)
+      router.push("/file-preview/" + fileURL);
+    },2000)
+  },[newfileURL])
   
   return (
     <div className='p-5 px-8 md:px-28'>
