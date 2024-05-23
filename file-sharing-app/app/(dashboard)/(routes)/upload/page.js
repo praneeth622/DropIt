@@ -64,7 +64,7 @@ function Upload() {
         userName:user?.username,
         password:'',
         id:docId,
-        shortURL:process.env.NEXT_PUBLIC_BASE_URL+docId,
+        shortURL:process.env.NEXT_PUBLIC_BASE_URL+"f/"+docId,
       });
       setFileURL(docId)
     }
