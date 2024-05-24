@@ -68,7 +68,7 @@ function FileItem({file}) {
               onClick={()=>window.open(fileState?.fileUrl)}
               className={`w-full p-2 rounded-lg ${
                 isPasswordCorrect || !fileState?.password
-                  ? 'bg-blue-500 text-white'
+                  ? 'bg-orange-500 text-white'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >

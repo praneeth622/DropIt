@@ -48,7 +48,7 @@ function FilePreview({params}) {
 
   return (
     <div className='flex border border-black-500 m-5'>
-      <FileInfo imageUrl ={File?.fileUrl} type={File?.fileType} />
+      <FileInfo imageUrl ={File} type={File?.fileType} />
       <FileShare File={File} savePassword={(password)=>passwordHandle(password)}/>
       <ToastContainer />
     </div>
