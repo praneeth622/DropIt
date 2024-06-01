@@ -14,7 +14,7 @@ function Header() {
         <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 border-b">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <a href="#" className="flex items-center">
-              <Image src="./logo.svg" width={150} height={100} />
+              <Image src="./logo.svg" width={150} alt='Logo' height={100} />
             </a>
             <div className="flex items-center lg:order-2">
             <a

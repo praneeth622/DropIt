@@ -1,3 +1,4 @@
+"use client"
 import { EmailTemplate } from '../../_components/email-template';
 import { Resend } from 'resend';
 

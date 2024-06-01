@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.0.12",
+    "@clerk/nextjs": "^5.1.2",
     "@react-email/components": "0.0.18",
     "axios": "^1.7.2",
     "firebase": "^10.12.1",
