@@ -1,18 +1,18 @@
 import { Copy, Mail } from 'lucide-react';
 import { useState } from 'react';
-import GlobalApi from '../../../../../_utlis/GlobalApi'
+import { useParams } from 'next/navigation'
+import GlobalApi from '../../../../../_utlis/GlobalApi';
 import { useUser } from '@clerk/nextjs';
 
-const FIleShare = ({ File, savePassword }) => {
-
-  const user = useUser()
+const FIleShare = ({ File, savePassword ,shortUrl}) => {
+  const user = useUser();
 
   const [enablePassword, setEnablePassword] = useState(false);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(File?.fileUrl || '');
+    navigator.clipboard.writeText(shortUrl || '');
   };
 
   const handleSendEmail = () => {
@@ -40,7 +40,7 @@ const FIleShare = ({ File, savePassword }) => {
             Short URL
           </label>
           <span className="inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100">
-            <span className="truncate text-wrap">{File?.fileUrl}</span>
+            <span className="truncate text-wrap">{shortUrl}</span>
             <button type="button" onClick={handleCopy} className="ml-4 focus:outline-none">
               <Copy className="h-5 w-5 text-gray-400" />
             </button>

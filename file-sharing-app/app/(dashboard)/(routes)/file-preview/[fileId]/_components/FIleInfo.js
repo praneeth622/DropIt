@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 const FileInfo = ({ File, type }) => {
+  
   return (
     <div className="file-info flex flex-col sm:w-auto items-center justify-center p-5 border border-gray-300 shadow-lg rounded-lg w-[50%] m-5 bg-white">
       <div className="flex flex-col items-center">

@@ -14,6 +14,7 @@ function FilePreview({params}) {
   const db = getFirestore(app);
 
   const [File,setFile] = useState()
+  const [url,setUrl] = useState()
 
   const notifySuccess = () => toast.success("Password Set Sucessfull!", { position: "top-right" });
 
@@ -21,6 +22,8 @@ function FilePreview({params}) {
     console.log(params?.fileId)
     params?.fileId&&getFileInfo()
     console.log("File data "+File?.fileName)
+
+    setUrl(`https://dropit123.vercel.app/f/${params?.fileId}`)
   },[])
 
   const getFileInfo=async()=>{
@@ -28,7 +31,7 @@ function FilePreview({params}) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      //console.log("Document data :", docSnap.data());
+      // console.log("Document data :", docSnap.data());
       setFile(docSnap.data())
     } else {
       // docSnap.data() will be undefined in this case
@@ -49,7 +52,7 @@ function FilePreview({params}) {
   return (
     <div className='flex border border-black-500 m-5'>
       <FileInfo imageUrl ={File} type={File?.fileType} />
-      <FileShare File={File} savePassword={(password)=>passwordHandle(password)}/>
+      <FileShare File={File} shortUrl={url} savePassword={(password)=>passwordHandle(password)}/>
       <ToastContainer />
     </div>
   )

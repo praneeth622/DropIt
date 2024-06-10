@@ -4,6 +4,7 @@ import { File, Gem, Upload } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
+import logo from '../../_components/Dropit-right-transparent.png'
 
 function SideNavbar() {
   const menuList = [
@@ -45,8 +46,10 @@ function SideNavbar() {
 
   return (
     <div className="shadow-sm border-r h-full">
-      <div className="border-b p-5">
-        <Image src="/logo.svg" width={150} height={100} alt="Logo" />
+      <div className="border-b p-7">
+        <a href="/" className="flex items-center">
+          <Image src={logo} width={120} height={80} alt="Logo" />
+        </a>
       </div>
       <div className="flex flex-col">
         {menuList.map((item, index) => (
