@@ -73,6 +73,7 @@ To push the Docker image to the repository, use the following command:
 
 ```bash
 docker push praneeth0331/dropit:tagname
+```
 
 ## Contributing
 
