@@ -67,12 +67,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 The application can be deployed on Vercel for optimal performance and scalability. Refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Docker Push
+## Docker 
 
-To push the Docker image to the repository, use the following command:
+To run in the Docker image , use the following command:
 
 ```bash
-docker push praneeth0331/dropit:tagname
+docker run praneeth0331/dropit:tagname
 ```
 ## Contributing
 
