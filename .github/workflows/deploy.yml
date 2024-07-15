@@ -25,8 +25,8 @@ jobs:
     - name: Build and Push Docker image
       uses: docker/build-push-action@v3
       with:
-        context: .
-        file: ./Dockerfile
+        context: ./file-sharing-app 
+        file: ./file-sharing-app/Dockerfile
         push: true
         tags: praneeth0331/dropit:latest
 
