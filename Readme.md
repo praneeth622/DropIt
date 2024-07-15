@@ -10,6 +10,7 @@ This repository contains a file-sharing application built using Next.js, Firebas
 - **File Sharing**: Generate shareable links for uploaded files.
 - **User Authentication**: Secure user login and registration using Firebase Authentication.
 - **Real-time Updates**: Sync file changes in real-time with Firebase.
+- **Docker**: Project File is Stored in Docker as Docker Image using CI/CD Pipeline. 
 
 ## Technologies Used
 
@@ -17,6 +18,7 @@ This repository contains a file-sharing application built using Next.js, Firebas
 - **Firebase**: Backend as a Service (BaaS) for authentication and real-time database.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
 - **Vercel**: Hosting platform for seamless deployment.
+- **Github Actions**: CI/CD Integration with GitHub Actions
 
 ## Getting Started
 
@@ -74,6 +76,11 @@ To run in the Docker image , use the following command:
 ```bash
 docker run praneeth0331/dropit:tagname
 ```
+
+## CI/CD Integration
+
+This repository includes CI/CD integration using GitHub Actions. The workflow automates the build and deployment process to ensure efficient development cycles.
+
 ## Contributing
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
