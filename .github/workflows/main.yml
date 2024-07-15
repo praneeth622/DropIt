@@ -1,0 +1,35 @@
+name: Build and Deploy
+
+on: [push]
+
+jobs:
+  build:
+    name: Build Action
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Navigate to project directory
+      run: cd file-sharing-app
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./file-sharing-app
+
+    - name: Build the project
+      env:
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+        CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+        NEXT_PUBLIC_CLERK_SIGN_IN_URL: ${{ secrets.NEXT_PUBLIC_CLERK_SIGN_IN_URL }}
+        NEXT_PUBLIC_CLERK_SIGN_UP_URL: ${{ secrets.NEXT_PUBLIC_CLERK_SIGN_UP_URL }}
+        NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+        RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      run: npm run build
+      working-directory: ./file-sharing-app
