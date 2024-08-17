@@ -1,11 +1,12 @@
-import { Inter,Outfit } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import {
   ClerkProvider,
   SignInButton,
   SignedIn,
   SignedOut,
   UserButton
-} from '@clerk/nextjs'
+} from '@clerk/nextjs';
 import "./globals.css";
 
 const inter = Outfit({ subsets: ["latin"] });
@@ -21,8 +22,9 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={inter.className}>
           {children}
-          </body>
+          <Analytics />
+        </body>
       </html>
-      </ClerkProvider>
+    </ClerkProvider>
   );
 }
